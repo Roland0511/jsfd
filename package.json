@@ -1,0 +1,38 @@
+{
+  "name": "jsfd",
+  "version": "1.0.0",
+  "description": "Just Another Feishu Doc Converter - CLI tool for fetching and converting Feishu (Lark) Wiki/Doc/Sheet/Bitable content",
+  "main": "index.js",
+  "bin": {
+    "jsfd": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "feishu",
+    "lark",
+    "wiki",
+    "doc",
+    "sheet",
+    "bitable",
+    "markdown",
+    "cli",
+    "export",
+    "converter"
+  ],
+  "author": "Roland0511",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "dotenv": "^17.3.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Roland0511/jsfd.git"
+  },
+  "homepage": "https://github.com/Roland0511/jsfd"
+}

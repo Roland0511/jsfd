@@ -1,0 +1,13 @@
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+
+# Configuration files (may contain secrets)
+config.json
+jsfd.json
+.env
+
+# Cache is stored in user's home directory, not in package
