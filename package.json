@@ -1,5 +1,5 @@
 {
-  "name": "jsfd",
+  "name": "@roland0511/jsfd",
   "version": "1.0.0",
   "description": "Just Another Feishu Doc Converter - CLI tool for fetching and converting Feishu (Lark) Wiki/Doc/Sheet/Bitable content",
   "main": "index.js",
