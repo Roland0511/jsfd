@@ -16,11 +16,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
+            node-version: 25
+            registry-url: "https://registry.npmjs.org"
 
       - run: npm ci
       - run: npm test
@@ -30,13 +31,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # fetch-depth 0 helps avoid some edge cases when pushing
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 25
           registry-url: https://registry.npmjs.org/
 
       - run: npm ci
