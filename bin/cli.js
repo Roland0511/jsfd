@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * jsfd - Just Another Feishu Doc Converter
+ * jafd - Just Another Feishu Doc Converter
  * CLI Entry Point
  */
 
@@ -15,7 +15,7 @@ const { extractToken } = require('../lib/utils.js');
 const { getToken } = require('../lib/auth.js');
 
 program
-  .name('jsfd')
+  .name('jafd')
   .description('Just Another Feishu Doc Converter - Fetch and convert Feishu (Lark) content')
   .version('1.0.0');
 

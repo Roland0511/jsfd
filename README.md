@@ -1,4 +1,4 @@
-# jsfd
+# jafd
 
 > Just Another Feishu Doc Converter
 
@@ -18,24 +18,24 @@ A CLI tool and Node.js library for fetching and converting Feishu (Lark) Wiki/Do
 ### Global installation (recommended for CLI use)
 
 ```bash
-npm install -g @roland0511/jsfd-cli
+npm install -g @roland0511/jafd
 ```
 
 ### Local installation
 
 ```bash
-npm install @roland0511/jsfd-cli
+npm install @roland0511/jafd
 ```
 
 ### Use via npx (no installation)
 
 ```bash
-npx @roland0511/jsfd-cli <command>
+npx @roland0511/jafd <command>
 ```
 
 ## Configuration
 
-Before using jsfd, you need to configure your Feishu app credentials.
+Before using jafd, you need to configure your Feishu app credentials.
 
 ### Option 1: Environment variables
 
@@ -48,9 +48,9 @@ export FEISHU_APP_SECRET="your_app_secret"
 
 ### Option 2: Configuration file
 
-Create a `jsfd.json` or `config.json` file in:
+Create a `jafd.json` or `config.json` file in:
 - Current working directory
-- `~/.jsfd/config.json`
+- `~/.jafd/config.json`
 
 ```json
 {
@@ -63,7 +63,7 @@ Create a `jsfd.json` or `config.json` file in:
 
 Create a `.env` file in:
 - Current working directory
-- `~/.jsfd/.env`
+- `~/.jafd/.env`
 - `~/.env`
 
 ```
@@ -77,99 +77,99 @@ FEISHU_APP_SECRET=your_app_secret
 
 ```bash
 # Read a document (cached as markdown/csv with images)
-jsfd read <token_or_url>
+jafd read <token_or_url>
 ```
 
 ### Export a document
 
 ```bash
 # Export to current directory
-jsfd export <token_or_url>
+jafd export <token_or_url>
 
 # Export to specific directory
-jsfd export <token_or_url> -o ./output
-jsfd export <token_or_url> --output-dir ./output
+jafd export <token_or_url> -o ./output
+jafd export <token_or_url> --output-dir ./output
 ```
 
 ### List Wiki children
 
 ```bash
-jsfd list <wiki_token_or_url>
+jafd list <wiki_token_or_url>
 # or
-jsfd list-children <wiki_token_or_url>
+jafd list-children <wiki_token_or_url>
 ```
 
 ### Search Wiki
 
 ```bash
-jsfd search "search query" <wiki_token_or_url>
+jafd search "search query" <wiki_token_or_url>
 ```
 
 ### Resolve a token
 
 ```bash
-jsfd resolve <token_or_url>
+jafd resolve <token_or_url>
 ```
 
 ### Create a document
 
 ```bash
-jsfd create "Document Title"
-jsfd create "Document Title" --folder <folder_token>
+jafd create "Document Title"
+jafd create "Document Title" --folder <folder_token>
 ```
 
 ### Write to a document
 
 ```bash
-jsfd write <token_or_url> "Content to write"
+jafd write <token_or_url> "Content to write"
 ```
 
 ### Append to a document
 
 ```bash
-jsfd append <token_or_url> "Content to append"
+jafd append <token_or_url> "Content to append"
 ```
 
 ### Help
 
 ```bash
-jsfd --help
-jsfd <command> --help
+jafd --help
+jafd <command> --help
 ```
 
 ## Node.js API Usage
 
 ```javascript
-const jsfd = require('@roland0511/jsfd-cli');
+const jafd = require('@roland0511/jafd');
 
 // Read a document
-const doc = await jsfd.readDoc('doc_token_or_url');
+const doc = await jafd.readDoc('doc_token_or_url');
 console.log(doc);
 
 // Export a document
-const result = await jsfd.exportDoc('doc_token_or_url', './output');
+const result = await jafd.exportDoc('doc_token_or_url', './output');
 
 // List wiki children
-const children = await jsfd.listChildren('wiki_token');
+const children = await jafd.listChildren('wiki_token');
 
 // Search wiki
-const results = await jsfd.searchWiki('query', 'wiki_token');
+const results = await jafd.searchWiki('query', 'wiki_token');
 
 // Create a document
-const newDoc = await jsfd.createDoc('My Document');
+const newDoc = await jafd.createDoc('My Document');
 
 // Write to a document
-await jsfd.writeDoc('doc_token', '# Hello\n\nWorld');
+await jafd.writeDoc('doc_token', '# Hello\n\nWorld');
 
 // Append to a document
-await jsfd.appendDoc('doc_token', 'More content');
+await jafd.appendDoc('doc_token', 'More content');
 ```
 
 ## Cache
 
-jsfd caches downloaded content and access tokens in:
-- `~/.jsfd/cache/` - Cached documents and assets
-- `~/.jsfd/cache/feishu_token.json` - Cached access token
+jafd caches downloaded content and access tokens in:
+- `~/.jafd/cache/` - Cached documents and assets
+- `~/.jafd/cache/feishu_token.json` - Cached access token
 
 The cache is valid for 1 hour.
 

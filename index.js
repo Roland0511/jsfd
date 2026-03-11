@@ -1,5 +1,5 @@
 /**
- * jsfd - Just Another Feishu Doc Converter
+ * jafd - Just Another Feishu Doc Converter
  * Node.js API Entry Point
  */
 
