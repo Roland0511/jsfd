@@ -1,5 +1,5 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+# This workflow will run tests using node and then publish a package to npm when a release is created
+# It will also sync package.json version to the release tag and commit that back to main.
 
 name: Node.js Package
 
@@ -7,14 +7,20 @@ on:
   release:
     types: [created]
 
+# needed for pushing commits back to the repo
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - run: npm ci
       - run: npm test
 
@@ -22,12 +28,54 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth 0 helps avoid some edge cases when pushing
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+
       - run: npm ci
-      - run: npm publish
+
+      - name: Set version from release tag
+        shell: bash
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          VERSION="${TAG#v}"
+
+          echo "Release tag: $TAG"
+          echo "Version to set: $VERSION"
+
+          # basic sanity check: require something like 1.2.3 (allow pre-release/build too)
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([\-+].*)?$ ]]; then
+            echo "ERROR: Release tag must look like v1.2.3 or 1.2.3. Got: $TAG"
+            exit 1
+          fi
+
+          # update package.json (and package-lock.json if present) without creating a git tag
+          npm version "$VERSION" --no-git-tag-version
+
+      - name: Commit version bump back to main
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # add both if present (package-lock may not exist)
+          git add package.json package-lock.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No version changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore(release): bump version to ${{ github.event.release.tag_name }}"
+          git push origin HEAD:main
+
+      - name: Publish to npm
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
