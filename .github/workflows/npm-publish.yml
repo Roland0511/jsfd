@@ -10,6 +10,7 @@ on:
 # needed for pushing commits back to the repo
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   build:
@@ -75,7 +76,5 @@ jobs:
           git commit -m "chore(release): bump version to ${{ github.event.release.tag_name }}"
           git push origin HEAD:main
 
-      - name: Publish to npm
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+      - name: Publish to npm (Trusted Publishing)
+        run: npm publish --access public
