@@ -34,5 +34,9 @@
     "type": "git",
     "url": "https://github.com/Roland0511/jsfd-cli.git"
   },
-  "homepage": "https://github.com/Roland0511/jsfd-cli"
+  "homepage": "https://github.com/Roland0511/jsfd-cli",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
 }
