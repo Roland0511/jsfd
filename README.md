@@ -18,19 +18,19 @@ A CLI tool and Node.js library for fetching and converting Feishu (Lark) Wiki/Do
 ### Global installation (recommended for CLI use)
 
 ```bash
-npm install -g jsfd
+npm install -g @roland0511/jsfd-cli
 ```
 
 ### Local installation
 
 ```bash
-npm install jsfd
+npm install @roland0511/jsfd-cli
 ```
 
 ### Use via npx (no installation)
 
 ```bash
-npx jsfd <command>
+npx @roland0511/jsfd-cli <command>
 ```
 
 ## Configuration
@@ -140,7 +140,7 @@ jsfd <command> --help
 ## Node.js API Usage
 
 ```javascript
-const jsfd = require('jsfd');
+const jsfd = require('@roland0511/jsfd-cli');
 
 // Read a document
 const doc = await jsfd.readDoc('doc_token_or_url');
